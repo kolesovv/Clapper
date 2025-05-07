@@ -40,7 +40,7 @@ dependencies {
     implementation (libs.adapter.rxjava3)
     implementation (libs.rxandroid)
     implementation (libs.rxjava)
-    implementation(libs.converter.gson)
+    implementation(libs.retrofit2.converter.gson)
     implementation (libs.retrofit)
     implementation(libs.appcompat)
     implementation(libs.material)
