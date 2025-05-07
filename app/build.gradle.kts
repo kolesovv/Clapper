@@ -6,6 +6,10 @@ android {
     namespace = "com.github.kolesovv.clapper"
     compileSdk = 35
 
+    buildFeatures {
+        buildConfig = true
+    }
+
     defaultConfig {
         applicationId = "com.github.kolesovv.clapper"
         minSdk = 21
@@ -14,6 +18,8 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        buildConfigField("String", "API_KEY", "\"${properties["API_KEY"]}\"")
     }
 
     buildTypes {
