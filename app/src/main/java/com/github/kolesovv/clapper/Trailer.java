@@ -2,15 +2,19 @@ package com.github.kolesovv.clapper;
 
 import com.google.gson.annotations.SerializedName;
 
-import java.io.Serializable;
-
-public class Poster implements Serializable {
-
+public class Trailer {
+    @SerializedName("name")
+    private String name;
     @SerializedName("url")
     private String url;
 
-    public Poster(String url) {
+    public Trailer(String name, String url) {
+        this.name = name;
         this.url = url;
+    }
+
+    public String getName() {
+        return name;
     }
 
     public String getUrl() {

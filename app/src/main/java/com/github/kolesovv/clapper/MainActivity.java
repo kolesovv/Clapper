@@ -1,5 +1,6 @@
 package com.github.kolesovv.clapper;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ProgressBar;
@@ -20,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
     private MainViewModel viewModel;
     private RecyclerView recyclerViewMovies;
     private ProgressBar progressBarLoading;
-    private MoviesAdapter moviesAdapter;
+    private MovieAdapter movieAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,13 +34,13 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
         initViews();
-        moviesAdapter = new MoviesAdapter();
-        recyclerViewMovies.setAdapter(moviesAdapter);
+        movieAdapter = new MovieAdapter();
+        recyclerViewMovies.setAdapter(movieAdapter);
         viewModel = new ViewModelProvider(MainActivity.this).get(MainViewModel.class);
         viewModel.getMovies().observe(MainActivity.this, new Observer<List<Movie>>() {
             @Override
             public void onChanged(List<Movie> movies) {
-                moviesAdapter.setMovies(movies);
+                movieAdapter.setMovies(movies);
             }
         });
         viewModel.getIsLoading().observe(MainActivity.this, new Observer<Boolean>() {
@@ -52,10 +53,17 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
-        moviesAdapter.setOnReachEndListener(new MoviesAdapter.OnReachEndListener() {
+        movieAdapter.setOnReachEndListener(new MovieAdapter.OnReachEndListener() {
             @Override
             public void onReachEnd() {
                 viewModel.loadMovies();
+            }
+        });
+        movieAdapter.setOnMovieClickListener(new MovieAdapter.OnMovieClickListener() {
+            @Override
+            public void onMovieClick(Movie movie) {
+                Intent intent = MovieDetailActivity.newIntent(MainActivity.this, movie);
+                startActivity(intent);
             }
         });
     }

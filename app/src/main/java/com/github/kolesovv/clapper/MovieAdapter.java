@@ -16,10 +16,11 @@ import com.bumptech.glide.Glide;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.ViewHolderMovie> {
+public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolderMovie> {
 
     private List<Movie> movies = new ArrayList<>();
     private OnReachEndListener onReachEndListener;
+    private OnMovieClickListener onMovieClickListener;
 
     public void setMovies(List<Movie> movies) {
 
@@ -29,6 +30,10 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.ViewHolder
 
     public void setOnReachEndListener(OnReachEndListener onReachEndListener) {
         this.onReachEndListener = onReachEndListener;
+    }
+
+    public void setOnMovieClickListener(OnMovieClickListener onMovieClickListener) {
+        this.onMovieClickListener = onMovieClickListener;
     }
 
     @NonNull
@@ -67,6 +72,15 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.ViewHolder
         if (position >= (movies.size() - 10) && onReachEndListener != null) {
             onReachEndListener.onReachEnd();
         }
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (onMovieClickListener != null) {
+                    onMovieClickListener.onMovieClick(movie);
+                }
+            }
+        });
     }
 
     @Override
@@ -77,6 +91,11 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.ViewHolder
     interface OnReachEndListener {
 
         void onReachEnd();
+    }
+
+    interface OnMovieClickListener {
+
+        void onMovieClick(Movie movie);
     }
 
     static class ViewHolderMovie extends RecyclerView.ViewHolder {
