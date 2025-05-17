@@ -13,4 +13,11 @@ public interface ApiService {
 
     @GET(value = "movie/{id}")
     Single<TrailerResponse> loadTrailers(@Header("X-API-KEY") String apiKey, @Path("id") int id);
+
+    @GET(value = "review?")
+    Single<ReviewResponse> loadReviews(
+            @Header("X-API-KEY") String apiKey,
+            @Query("page") int page,
+            @Query("limit") int limit,
+            @Query("movieId") int movieId);
 }
