@@ -16,7 +16,7 @@ import java.util.List;
 public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.ViewHolderReview> {
 
     public static final String TYPE_POSITIVE = "Позитивный";
-    public static final String TYPE_NEGATIVE = "Отрицательный";
+    public static final String TYPE_NEGATIVE = "Негативный";
     private List<Review> reviews = new ArrayList<>();
 
     public void setReviews(List<Review> reviews) {
