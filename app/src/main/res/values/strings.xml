@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Clapper</string>
+    <string name="item_favorite">Favorite</string>
 </resources>
